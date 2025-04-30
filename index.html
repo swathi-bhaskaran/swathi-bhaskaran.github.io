@@ -1,130 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Professional Portfolio of Swathi Lakshmi Bhaskaran, Data Engineer">
-  <meta name="keywords" content="data engineer, portfolio, python, SQL">
+  <meta name="description" content="Professional portfolio of Swathi Lakshmi Bhaskaran, Data Engineer">
+  <meta name="keywords" content="data engineer, portfolio, python, SQL, data analytics">
   <title>Swathi Lakshmi Bhaskaran | Data Engineer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/favicon.ico">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="bg-animation">
-    <div class="stars"></div>
-    <div class="stars2"></div>
+  <!-- Animated Background Elements -->
+  <div class="bg-elements">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
   </div>
 
   <!-- Navigation -->
   <nav class="glass-nav">
     <ul>
-      <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
-      <li><a href="#resume"><i class="fas fa-file-alt"></i> Resume</a></li>
-      <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-      <li><button id="theme-toggle"><i class="fas fa-moon"></i></button></li>
+      <li><a href="#home"><i class="fas fa-home"></i> <span>Home</span></a></li>
+      <li><a href="#projects"><i class="fas fa-code"></i> <span>Projects</span></a></li>
+      <li><a href="#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
+      <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+      <li>
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+          <span class="sr-only">Toggle Dark Mode</span>
+        </button>
+      </li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-content">
-      <div class="profile-img-container">
-        <img src="assets/profile.jpg" alt="Swathi" class="profile-img">
+      <div class="profile-container">
+        <div class="profile-frame">
+          <img src="assets/profile.jpg" alt="Swathi Lakshmi Bhaskaran" class="profile-img">
+        </div>
         <div class="tech-icons">
-          <i class="fab fa-python"></i>
-          <i class="fas fa-database"></i>
-          <i class="fab fa-aws"></i>
-          <i class="fas fa-cloud"></i>
+          <i class="fab fa-python" title="Python"></i>
+          <i class="fas fa-database" title="SQL"></i>
+          <i class="fab fa-aws" title="AWS"></i>
+          <i class="fas fa-chart-line" title="Data Analytics"></i>
         </div>
       </div>
-      <h1 class="typewriter">Hi, I'm <span class="highlight">Swathi</span></h1>
-      <p class="typing-subtitle"></p>
-      <div class="hero-btns">
-        <a href="#resume" class="btn pulse"><i class="fas fa-file-download"></i> View Resume</a>
-        <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Hire Me</a>
+      <div class="hero-text">
+        <h1 class="typewriter">Hi, I'm <span class="highlight">Swathi</span></h1>
+        <p class="typing-subtitle"></p>
+        <div class="hero-buttons">
+          <a href="#resume" class="btn pulse">
+            <i class="fas fa-file-download"></i> View Resume
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-paper-plane"></i> Contact Me
+          </a>
+        </div>
       </div>
     </div>
-    <div class="scroll-down">
-      <span></span>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="projects">
+  <section id="projects" class="section">
     <div class="section-header">
       <h2><i class="fas fa-project-diagram"></i> My Projects</h2>
-      <p>Data engineering and analytics projects</p>
+      <p class="section-subtitle">Data engineering and analytics work samples</p>
     </div>
     <div class="projects-grid" id="projects-container">
-      <!-- Dynamically loaded -->
+      <!-- Projects loaded dynamically -->
     </div>
   </section>
 
   <!-- Resume Section -->
-  <section id="resume" class="resume-section">
+  <section id="resume" class="section">
     <div class="section-header">
       <h2><i class="fas fa-file-alt"></i> My Resume</h2>
-      <p>Professional experience and skills</p>
+      <p class="section-subtitle">Professional experience and skills</p>
     </div>
     <div class="resume-container glass-card">
       <div class="resume-viewer">
-        <embed src="assets/swathi-resume.pdf" type="application/pdf" width="100%" height="600px">
+        <embed src="assets/resume.pdf" type="application/pdf" width="100%" height="600px">
       </div>
       <div class="resume-actions">
-        <a href="assets/swathi-resume.pdf" download class="btn"><i class="fas fa-download"></i> Download PDF</a>
-        <div class="skills-chart">
-          <h3>Key Skills</h3>
-          <div class="skill" data-skill="Python" data-level="90"></div>
-          <div class="skill" data-skill="SQL" data-level="85"></div>
-          <div class="skill" data-skill="ETL" data-level="80"></div>
-          <div class="skill" data-skill="AWS" data-level="75"></div>
+        <a href="assets/resume.pdf" download class="btn">
+          <i class="fas fa-download"></i> Download PDF
+        </a>
+        <div class="skills-section">
+          <h3>Technical Skills</h3>
+          <div class="skills-grid">
+            <div class="skill" data-skill="Python" data-level="95"></div>
+            <div class="skill" data-skill="SQL" data-level="90"></div>
+            <div class="skill" data-skill="ETL" data-level="85"></div>
+            <div class="skill" data-skill="AWS" data-level="80"></div>
+            <div class="skill" data-skill="Spark" data-level="75"></div>
+            <div class="skill" data-skill="Tableau" data-level="70"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="contact-section">
+  <section id="contact" class="section">
     <div class="section-header">
       <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
-      <p>Let's work together!</p>
+      <p class="section-subtitle">Let's work together!</p>
     </div>
     <div class="contact-container">
-      <form class="contact-form glass-card" action="https://formspree.io/f/your-form-id" method="POST">
+      <form class="contact-form glass-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="form-group">
-          <input type="text" name="name" placeholder="Your Name" required>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
           <i class="fas fa-user"></i>
         </div>
         <div class="form-group">
-          <input type="email" name="email" placeholder="Your Email" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
           <i class="fas fa-envelope"></i>
         </div>
         <div class="form-group">
-          <textarea name="message" placeholder="Your Message" required></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
           <i class="fas fa-comment"></i>
         </div>
-        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <button type="submit" class="btn">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
       </form>
       <div class="contact-info glass-card">
-        <h3>Contact Info</h3>
-        <ul>
-          <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
-          <li><i class="fas fa-envelope"></i> swathi@example.com</li>
-          <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+        <h3>Contact Information</h3>
+        <ul class="contact-details">
+          <li>
+            <i class="fas fa-phone"></i>
+            <span>+1 (123) 456-7890</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>swathi@example.com</span>
+          </li>
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>San Francisco, CA</span>
+          </li>
         </ul>
         <div class="social-links">
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
