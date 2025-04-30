@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of [Your Name], Web Developer">
+  <meta name="keywords" content="portfolio, web developer, resume">
   <title>Your Name | Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="assets/favicon.ico">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
 </head>
 <body>
   <!-- Navigation -->
@@ -24,7 +34,7 @@
       <img src="assets/profile.jpg" alt="Your Name" class="profile-img">
       <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
       <p>Web Developer | Open Source Contributor</p>
-      <a href="#projects" class="btn">View My Work</a>
+      <a href="#resume" class="btn">View Resume</a>
     </div>
   </section>
 
@@ -32,32 +42,30 @@
   <section id="projects" class="projects">
     <h2>My Projects</h2>
     <div class="projects-grid" id="projects-container">
-      <!-- Projects loaded via JavaScript -->
+      <!-- Loaded dynamically via script.js -->
     </div>
   </section>
 
   <!-- Resume Section -->
-  <section id="resume" class="resume">
-    <h2>My Resume</h2>
-    <a href="assets/resume.pdf" class="btn" download>Download Resume</a>
-    <iframe src="assets/resume.pdf" width="80%" height="500px"></iframe>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <h2>Get In Touch</h2>
-    <div class="social-links">
-      <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
+  <section id="resume">
+    <div class="resume-container">
+      <h2>My Resume</h2>
+      <a href="assets/resume.pdf" download class="btn resume-btn">Download PDF</a>
+      <embed src="assets/resume.pdf" type="application/pdf" width="100%" height="600px">
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Swathi Bhaskaran. All rights reserved.</p>
-  </footer>
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Get In Touch</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
 
   <script src="script.js"></script>
 </body>
-</html>"" 
+</html>
