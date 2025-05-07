@@ -1,67 +1,169 @@
-<!-- Resume Section -->
-<section id="resume" class="section">
-  <div class="section-header">
-    <h2><i class="fas fa-file-alt"></i> My Resume</h2>
-    <p class="section-subtitle">Professional experience and skills</p>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional portfolio of Swathi Lakshmi Bhaskaran, Data Engineer">
+  <meta name="keywords" content="data engineer, portfolio, python, SQL, data analytics">
+  <title>Swathi Lakshmi Bhaskaran | Data Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Animated Background Elements -->
+  <div class="bg-elements">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
   </div>
-  <div class="resume-container glass-card">
-    <div class="resume-viewer">
-      <embed src="assets/swathi-bhaskaran-DA-resume.pdf" type="application/pdf" width="100%" height="600px">
+
+  <!-- Navigation -->
+  <nav class="glass-nav">
+    <ul>
+      <li><a href="#home"><i class="fas fa-home"></i> <span>Home</span></a></li>
+      <li><a href="#projects"><i class="fas fa-code"></i> <span>Projects</span></a></li>
+      <li><a href="#resume"><i class="fas fa-file-alt"></i> <span>Resume</span></a></li>
+      <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+      <li>
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+          <span class="sr-only">Toggle Dark Mode</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="profile-container">
+        <div class="profile-frame">
+          <img src="assets/profile.png" alt="Swathi Lakshmi Bhaskaran" class="profile-img">
+        </div>
+        <div class="tech-icons">
+          <i class="fab fa-python" title="Python"></i>
+          <i class="fas fa-database" title="SQL"></i>
+          <i class="fab fa-aws" title="AWS"></i>
+          <i class="fas fa-chart-line" title="Data Analytics"></i>
+        </div>
+      </div>
+      <div class="hero-text">
+        <h1 class="typewriter">Hi, I'm <span class="highlight">Swathi</span></h1>
+        <p class="typing-subtitle"></p>
+        <div class="hero-buttons">
+          <a href="#resume" class="btn pulse">
+            <i class="fas fa-file-download"></i> View Resume
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-paper-plane"></i> Contact Me
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="resume-actions">
-      <a href="assets/swathi-bhaskaran-DA-resume.pdf" download="Swathi_Bhaskaran_Resume.pdf" class="btn">
-        <i class="fas fa-download"></i> Download PDF
-      </a>
-      <div class="skills-section">
-        <h3>Technical Skills</h3>
-        <div class="skills-grid">
-          <div class="skill" data-skill="Python" data-level="95">
-            <div class="skill-info">
-              <span>Python</span>
-              <span>95%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-level"></div>
-            </div>
-          </div>
-          <div class="skill" data-skill="SQL" data-level="90">
-            <div class="skill-info">
-              <span>SQL</span>
-              <span>90%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-level"></div>
-            </div>
-          </div>
-          <div class="skill" data-skill="Azure" data-level="85">
-            <div class="skill-info">
-              <span>Azure</span>
-              <span>85%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-level"></div>
-            </div>
-          </div>
-          <div class="skill" data-skill="PySpark" data-level="80">
-            <div class="skill-info">
-              <span>PySpark</span>
-              <span>80%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-level"></div>
-            </div>
-          </div>
-          <div class="skill" data-skill="DAX" data-level="75">
-            <div class="skill-info">
-              <span>DAX</span>
-              <span>75%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-level"></div>
-            </div>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="section-header">
+      <h2><i class="fas fa-project-diagram"></i> My Projects</h2>
+      <p class="section-subtitle">Data engineering and analytics work samples</p>
+    </div>
+    <div class="projects-grid" id="projects-container">
+      <!-- Projects loaded dynamically -->
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" class="section">
+    <div class="section-header">
+      <h2><i class="fas fa-file-alt"></i> My Resume</h2>
+      <p class="section-subtitle">Professional experience and skills</p>
+    </div>
+    <div class="resume-container glass-card">
+      <div class="resume-viewer">
+        <embed src="assets/swathi-bhaskaran-DA-resume.pdf" type="application/pdf" width="100%" height="600px">
+      </div>
+      <div class="resume-actions">
+        <a href="assets/swathi-bhaskaran-DA-resume.pdf" download="Swathi_Bhaskaran_Resume.pdf" class="btn">
+          <i class="fas fa-download"></i> Download PDF
+        </a>
+        <div class="skills-section">
+          <h3>Technical Skills</h3>
+          <div class="skills-grid">
+            <div class="skill" data-skill="Python" data-level="95"></div>
+            <div class="skill" data-skill="SQL" data-level="90"></div>
+            <div class="skill" data-skill="ETL" data-level="85"></div>
+            <div class="skill" data-skill="AWS" data-level="80"></div>
+            <div class="skill" data-skill="Spark" data-level="75"></div>
+            <div class="skill" data-skill="Tableau" data-level="70"></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="section-header">
+      <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
+      <p class="section-subtitle">Let's work together!</p>
+    </div>
+    <div class="contact-container">
+      <form class="contact-form glass-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <i class="fas fa-comment"></i>
+        </div>
+        <button type="submit" class="btn">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+      <div class="contact-info glass-card">
+        <h3>Contact Information</h3>
+        <ul class="contact-details">
+          <li>
+            <i class="fas fa-phone"></i>
+            <span>+1 (586) 345-2924</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>swathibhaskaran751@gmail.com</span>
+          </li>
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Clinton Township, MI</span>
+          </li>
+        </ul>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/swathi-bhaskaran" target="_blank" class="social-link" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/swathilbhaskaran" target="_blank" class="social-link" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
