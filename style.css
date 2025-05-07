@@ -1,24 +1,38 @@
-/* Add to your existing CSS */
-.error-message {
-  text-align: center;
+/* (Previous CSS remains exactly the same until the Projects Section) */
+
+/* Projects Section */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
   padding: 2rem;
-  color: var(--error-color);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
 }
 
 .project-card {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card h3 {
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
 }
 
-/* Loading state */
-#projects-container:empty::before {
-  content: "Loading projects...";
-  display: block;
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-secondary);
+.project-card p {
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
 }
+
+/* (Rest of the original CSS remains the same) */

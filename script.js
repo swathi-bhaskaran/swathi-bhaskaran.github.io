@@ -1,103 +1,101 @@
-// projects.js - Dynamic project loader with fallback
-document.addEventListener('DOMContentLoaded', function() {
-  const container = document.getElementById('projects-container');
+// Theme Management
+const initTheme = () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const icon = themeToggle.querySelector('i');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   
-  // Try to load projects from GitHub first
-  loadProjectsFromGitHub().catch(error => {
-    console.error("GitHub load failed:", error);
-    showManualProjects(); // Fallback if GitHub fails
+  // Check localStorage for saved theme
+  const savedTheme = localStorage.getItem('theme');
+  
+  // Set initial theme
+  let currentTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  
+  // Set initial icon
+  if (currentTheme === 'dark') {
+    icon.classList.replace('fa-moon', 'fa-sun');
+  }
+
+  // Toggle function
+  themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    
+    // Update icon
+    icon.classList.toggle('fa-sun');
+    icon.classList.toggle('fa-moon');
   });
+};
 
-  // Initialize animations after loading
-  initProjectCards();
-});
-
-async function loadProjectsFromGitHub() {
-  const response = await fetch('https://api.github.com/repos/hq4743/hq4743.github.io/contents/assets/projects');
-  const projects = await response.json();
+// Typewriter Effect
+const initTypewriter = () => {
+  const title = document.querySelector('.hero h1');
+  const subtitle = document.querySelector('.hero p');
+  const titleText = "Hi, I'm Swathi";
+  const subtitleText = "Data Engineer | Open Source Contributor";
   
-  const container = document.getElementById('projects-container');
-  container.innerHTML = ''; // Clear loading placeholders
-
-  projects.forEach(project => {
-    if (project.type === 'dir') {
-      container.appendChild(createProjectCard(project));
+  // Reset for animation
+  title.textContent = '';
+  subtitle.textContent = '';
+  
+  // Animate title
+  let i = 0;
+  const typing = setInterval(() => {
+    if (i < titleText.length) {
+      title.textContent += titleText[i];
+      i++;
+    } else {
+      clearInterval(typing);
+      // Animate subtitle
+      let j = 0;
+      const subtitleTyping = setInterval(() => {
+        if (j < subtitleText.length) {
+          subtitle.textContent += subtitleText[j];
+          j++;
+        } else {
+          clearInterval(subtitleTyping);
+        }
+      }, 50);
     }
+  }, 100);
+};
+
+// Animate Skills
+const animateSkills = () => {
+  document.querySelectorAll('.skill').forEach(skill => {
+    const level = skill.dataset.level;
+    const bar = document.createElement('div');
+    bar.className = 'skill-bar';
+    bar.innerHTML = `<div class="skill-level" style="width: 0"></div>`;
+    skill.appendChild(bar);
+    
+    setTimeout(() => {
+      bar.querySelector('.skill-level').style.width = `${level}%`;
+    }, 500);
   });
-}
+};
 
-function createProjectCard(project) {
-  const card = document.createElement('div');
-  card.className = 'project-card';
-  
-  // Basic card structure (customize with your actual project data)
-  card.innerHTML = `
-    <h3>${formatProjectName(project.name)}</h3>
-    <p>${project.description || 'Data engineering project'}</p>
-    <div class="project-media">
-      <img src="${getProjectImage(project)}" 
-           alt="${project.name} preview"
-           onerror="this.src='assets/default-project.png'">
-      <div class="file-links">
-        <a href="https://github.com/hq4743/hq4743.github.io/tree/main/assets/projects/${project.name}" 
-           class="btn" target="_blank">
-          <i class="fab fa-github"></i> View on GitHub
-        </a>
-      </div>
-    </div>
-  `;
-  
-  return card;
-}
-
-// Fallback when GitHub loading fails
-function showManualProjects() {
-  const container = document.getElementById('projects-container');
-  container.innerHTML = `
-    <div class="project-card">
-      <h3>Healthcare Analytics</h3>
-      <p>Data analysis of patient records</p>
-      <div class="project-media">
-        <img src="assets/projects/healthcare/screenshot.png" alt="Healthcare Project">
-        <div class="file-links">
-          <a href="assets/projects/healthcare/report.pdf" class="btn" download>
-            <i class="fas fa-file-pdf"></i> Report
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <h3>Sales Dashboard</h3>
-      <p>Interactive Tableau dashboard</p>
-      <div class="project-media">
-        <img src="assets/projects/sales-dashboard/preview.jpg" alt="Sales Dashboard">
-        <div class="file-links">
-          <a href="assets/projects/sales-dashboard/dashboard.twb" class="btn" download>
-            <i class="fas fa-download"></i> Tableau File
-          </a>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// Helper functions
-function formatProjectName(name) {
-  return name.split('-').map(word => 
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join(' ');
-}
-
-function getProjectImage(project) {
-  // Implement logic to find project image
-  return `assets/projects/${project.name}/preview.jpg`;
-}
-
-function initProjectCards() {
-  // Your existing card animation code
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
-    // Add your tilt effects here...
+// Smooth Scrolling
+const initSmoothScroll = () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
   });
-}
+};
+
+// Initialize Everything
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initTypewriter();
+  animateSkills();
+  initSmoothScroll();
+});
