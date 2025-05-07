@@ -4,30 +4,20 @@ const initTheme = () => {
   const icon = themeToggle.querySelector('i');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   
-  // Check localStorage for saved theme
   const savedTheme = localStorage.getItem('theme');
-  
-  // Set initial theme
   let currentTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', currentTheme);
   
-  // Set initial icon
-  if (currentTheme === 'dark') {
-    icon.classList.replace('fa-moon', 'fa-sun');
-  }
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  if (currentTheme === 'dark') icon.classList.replace('fa-moon', 'fa-sun');
 
-  // Toggle function
   themeToggle.addEventListener('click', () => {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
-    
-    // Update icon
     icon.classList.toggle('fa-sun');
     icon.classList.toggle('fa-moon');
   });
 
-  // Watch for system changes (only if no saved preference)
   if (!savedTheme) {
     prefersDark.addEventListener('change', e => {
       currentTheme = e.matches ? 'dark' : 'light';
@@ -44,11 +34,9 @@ const initTypewriter = () => {
   const titleText = "Hi, I'm Swathi";
   const subtitleText = "Data Engineer | Open Source Contributor";
   
-  // Reset for animation
   title.textContent = '';
   subtitle.textContent = '';
   
-  // Animate title
   let i = 0;
   const typing = setInterval(() => {
     if (i < titleText.length) {
@@ -56,7 +44,6 @@ const initTypewriter = () => {
       i++;
     } else {
       clearInterval(typing);
-      // Animate subtitle
       let j = 0;
       const subtitleTyping = setInterval(() => {
         if (j < subtitleText.length) {
@@ -70,18 +57,18 @@ const initTypewriter = () => {
   }, 100);
 };
 
-// Animate Skills
+// Animate Skills - UPDATED
 const animateSkills = () => {
   document.querySelectorAll('.skill').forEach(skill => {
     const level = skill.dataset.level;
-    const bar = document.createElement('div');
-    bar.className = 'skill-bar';
-    bar.innerHTML = `<div class="skill-level" style="width: 0"></div>`;
-    skill.appendChild(bar);
+    const levelBar = skill.querySelector('.skill-level');
+    
+    // Reset to 0 for animation
+    levelBar.style.width = '0';
     
     setTimeout(() => {
-      bar.querySelector('.skill-level').style.width = `${level}%`;
-    }, 500);
+      levelBar.style.width = `${level}%`;
+    }, 100);
   });
 };
 
@@ -111,10 +98,7 @@ const initCardTilt = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const angleX = (y - centerY) / 20;
-      const angleY = (centerX - x) / 20;
-      
-      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+      card.style.transform = `perspective(1000px) rotateX(${(y - centerY) / 20}deg) rotateY(${(centerX - x) / 20}deg)`;
     });
     
     card.addEventListener('mouseleave', () => {
@@ -144,7 +128,7 @@ const initScrollAnimations = () => {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initTypewriter();
-  animateSkills();
+  animateSkills(); // Initializes the skill bars
   initSmoothScroll();
   initCardTilt();
   initScrollAnimations();
