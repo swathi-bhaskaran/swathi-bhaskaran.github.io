@@ -1,42 +1,102 @@
-<!-- Projects Section -->
-<section id="projects" class="section">
-  <div class="section-header">
-    <h2><i class="fas fa-project-diagram"></i> My Projects</h2>
-    <p class="section-subtitle">Data engineering and analytics work samples</p>
-  </div>
-  <div class="projects-grid" id="projects-container">
-    <!-- Project 1: Healthcare Analytics -->
-    <div class="project-card">
-      <h3>Healthcare Analytics</h3>
-      <p>Data analysis of patient records using Python and SQL.</p>
-      <div class="project-media">
-        <img src="assets/projects/healthcare/screenshot.png" alt="Healthcare Analytics Screenshot">
-        <div class="file-links">
-          <a href="assets/projects/healthcare/report.pdf" class="btn" download>
-            <i class="fas fa-file-pdf"></i> Download Report
-          </a>
-          <a href="assets/projects/healthcare/notebook.ipynb" class="btn btn-secondary" download>
-            <i class="fab fa-python"></i> Jupyter Notebook
-          </a>
-        </div>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name | Data Engineer</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header/Navigation -->
+  <header>
+    <!-- Your existing header content -->
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Project 2: Sales Dashboard -->
-    <div class="project-card">
-      <h3>Sales Dashboard</h3>
-      <p>Interactive Tableau dashboard analyzing regional sales data.</p>
-      <div class="project-media">
-        <img src="assets/projects/sales-dashboard/preview.jpg" alt="Sales Dashboard Preview">
-        <div class="file-links">
-          <a href="assets/projects/sales-dashboard/dashboard.twb" class="btn" download>
-            <i class="fas fa-download"></i> Tableau File
-          </a>
-          <a href="assets/projects/sales-dashboard/data.csv" class="btn btn-secondary" download>
-            <i class="fas fa-table"></i> Sample Data
-          </a>
+  <!-- Hero Section -->
+  <section id="hero">
+    <!-- Your existing hero content -->
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <!-- Your existing about content -->
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <!-- Your existing skills content -->
+  </section>
+
+  <!-- PROJECTS SECTION (UPDATED VERSION) -->
+  <section id="projects" class="section">
+    <div class="section-header">
+      <h2><i class="fas fa-project-diagram"></i> My Projects</h2>
+      <p class="section-subtitle">Data engineering and analytics work samples</p>
+    </div>
+    
+    <div class="projects-grid" id="projects-container">
+      <!-- Skeleton loading states -->
+      <div class="project-card skeleton">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-text"></div>
+        <div class="project-media">
+          <div class="skeleton-image"></div>
+          <div class="file-links">
+            <div class="skeleton-button"></div>
+            <div class="skeleton-button"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card skeleton">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-text"></div>
+        <div class="project-media">
+          <div class="skeleton-image"></div>
+          <div class="file-links">
+            <div class="skeleton-button"></div>
+            <div class="skeleton-button"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    
+    <!-- Error template (hidden by default) -->
+    <template id="project-error-template">
+      <div class="error-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>Projects failed to load. Please visit my <a href="https://github.com/hq4743" target="_blank">GitHub</a> directly.</p>
+      </div>
+    </template>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <!-- Your existing contact content -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <!-- Your existing footer content -->
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/theme.js"></script>
+  <script src="js/typewriter.js"></script>
+  <script src="js/projects.js" defer></script> <!-- New projects loader -->
+  <script src="js/skills.js"></script>
+  <script src="js/smooth-scroll.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
