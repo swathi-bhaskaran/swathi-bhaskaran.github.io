@@ -1,107 +1,103 @@
-// projects.js - New file to handle dynamic loading
-const loadProjects = async () => {
-  try {
-    // GitHub API endpoint for your projects folder
-    const response = await fetch('https://api.github.com/repos/hq4743/hq4743.github.io/contents/assets/projects');
-    const projects = await response.json();
-    
-    const container = document.getElementById('projects-container');
-    
-    // Clear existing placeholder cards
-    container.innerHTML = '';
-    
-    projects.forEach(async (projectDir) => {
-      if (projectDir.type === 'dir') {
-        // Get project details
-        const projResponse = await fetch(projectDir.url);
-        const projContents = await projResponse.json();
-        
-        // Find assets
-        const screenshot = projContents.find(file => 
-          file.name.match(/screenshot|preview|thumbnail/i)
-        );
-        const report = projContents.find(file => 
-          file.name.match(/report|documentation|readme/i)
-        );
-        const notebook = projContents.find(file => 
-          file.name.endsWith('.ipynb')
-        );
-        const dataFile = projContents.find(file => 
-          file.name.match(/\.csv|\.twb|\.xlsx/i)
-        );
-        
-        // Create card
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        
-        card.innerHTML = `
-          <h3>${formatName(projectDir.name)}</h3>
-          <p>${getDescription(projContents)}</p>
-          <div class="project-media">
-            ${screenshot ? `
-              <img src="${screenshot.download_url}" 
-                   alt="${projectDir.name} Screenshot"
-                   onerror="this.src='assets/default-project.png'">` : ''}
-            <div class="file-links">
-              ${report ? `
-                <a href="${report.download_url}" class="btn" download>
-                  <i class="fas fa-file-pdf"></i> Download Report
-                </a>` : ''}
-              ${notebook ? `
-                <a href="${notebook.download_url}" class="btn btn-secondary" download>
-                  <i class="fab fa-python"></i> Jupyter Notebook
-                </a>` : ''}
-              ${dataFile ? `
-                <a href="${dataFile.download_url}" class="btn btn-secondary" download>
-                  <i class="${getFileIcon(dataFile.name)}"></i> ${dataFile.name}
-                </a>` : ''}
-            </div>
-          </div>
-        `;
-        
-        container.appendChild(card);
-      }
-    });
-    
-    // Reinitialize animations after loading
-    initProjectCards();
-    
-  } catch (error) {
-    console.error("Failed to load projects:", error);
-    document.getElementById('projects-container').innerHTML = `
-      <div class="error-message">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>Projects failed to load. Please visit my <a href="https://github.com/hq4743">GitHub</a> directly.</p>
+// projects.js - Dynamic project loader with fallback
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('projects-container');
+  
+  // Try to load projects from GitHub first
+  loadProjectsFromGitHub().catch(error => {
+    console.error("GitHub load failed:", error);
+    showManualProjects(); // Fallback if GitHub fails
+  });
+
+  // Initialize animations after loading
+  initProjectCards();
+});
+
+async function loadProjectsFromGitHub() {
+  const response = await fetch('https://api.github.com/repos/hq4743/hq4743.github.io/contents/assets/projects');
+  const projects = await response.json();
+  
+  const container = document.getElementById('projects-container');
+  container.innerHTML = ''; // Clear loading placeholders
+
+  projects.forEach(project => {
+    if (project.type === 'dir') {
+      container.appendChild(createProjectCard(project));
+    }
+  });
+}
+
+function createProjectCard(project) {
+  const card = document.createElement('div');
+  card.className = 'project-card';
+  
+  // Basic card structure (customize with your actual project data)
+  card.innerHTML = `
+    <h3>${formatProjectName(project.name)}</h3>
+    <p>${project.description || 'Data engineering project'}</p>
+    <div class="project-media">
+      <img src="${getProjectImage(project)}" 
+           alt="${project.name} preview"
+           onerror="this.src='assets/default-project.png'">
+      <div class="file-links">
+        <a href="https://github.com/hq4743/hq4743.github.io/tree/main/assets/projects/${project.name}" 
+           class="btn" target="_blank">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
       </div>
-    `;
-  }
-};
+    </div>
+  `;
+  
+  return card;
+}
+
+// Fallback when GitHub loading fails
+function showManualProjects() {
+  const container = document.getElementById('projects-container');
+  container.innerHTML = `
+    <div class="project-card">
+      <h3>Healthcare Analytics</h3>
+      <p>Data analysis of patient records</p>
+      <div class="project-media">
+        <img src="assets/projects/healthcare/screenshot.png" alt="Healthcare Project">
+        <div class="file-links">
+          <a href="assets/projects/healthcare/report.pdf" class="btn" download>
+            <i class="fas fa-file-pdf"></i> Report
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <h3>Sales Dashboard</h3>
+      <p>Interactive Tableau dashboard</p>
+      <div class="project-media">
+        <img src="assets/projects/sales-dashboard/preview.jpg" alt="Sales Dashboard">
+        <div class="file-links">
+          <a href="assets/projects/sales-dashboard/dashboard.twb" class="btn" download>
+            <i class="fas fa-download"></i> Tableau File
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 // Helper functions
-function formatName(name) {
+function formatProjectName(name) {
   return name.split('-').map(word => 
     word.charAt(0).toUpperCase() + word.slice(1)
   ).join(' ');
 }
 
-function getDescription(contents) {
-  const readme = contents.find(file => file.name.toLowerCase() === 'readme.md');
-  return readme ? "Description loaded from README" : "Data engineering project";
+function getProjectImage(project) {
+  // Implement logic to find project image
+  return `assets/projects/${project.name}/preview.jpg`;
 }
 
-function getFileIcon(filename) {
-  if (filename.endsWith('.csv')) return 'fas fa-file-csv';
-  if (filename.endsWith('.twb')) return 'fas fa-chart-bar';
-  if (filename.endsWith('.xlsx')) return 'fas fa-file-excel';
-  return 'fas fa-file-download';
+function initProjectCards() {
+  // Your existing card animation code
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.1}s`;
+    // Add your tilt effects here...
+  });
 }
-
-// Update your initialization
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initTypewriter();
-  loadProjects(); // Replaced initProjectCards()
-  animateSkills();
-  initSmoothScroll();
-  initScrollAnimations();
-});
