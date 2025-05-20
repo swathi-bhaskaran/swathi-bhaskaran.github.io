@@ -1,15 +1,4 @@
-/* [All your existing CSS remains the same until .skills-section] */
-
-/* Updated Skills Section Styles */
-.skills-section {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 1.5rem;
-  border: 1px solid var(--glass-border);
-}
-
+/* Add to your existing CSS */
 .skill-name {
   display: block;
   font-weight: 600;
@@ -41,5 +30,3 @@
   width: 0;
   transition: width 1s ease;
 }
-
-/* [Rest of your existing CSS remains exactly the same] */

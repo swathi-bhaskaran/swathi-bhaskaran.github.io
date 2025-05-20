@@ -1,91 +1,47 @@
-// ===== Theme Management =====
-const initTheme = () => {
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = themeToggle.querySelector('i');
-  const html = document.documentElement;
-  
-  // Theme configurations
-  const themes = {
-    light: {
-      icon: 'fa-moon',
-      label: 'Switch to Dark Mode'
-    },
-    dark: {
-      icon: 'fa-sun',
-      label: 'Switch to Light Mode'
-    }
-  };
-  
-  // Get user preference or fallback to system preference
-  const getPreferredTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-    
-    return window.matchMedia('(prefers-color-scheme: dark)').matches 
-      ? 'dark' 
-      : 'light';
-  };
-  
-  // Apply theme
-  const setTheme = (theme) => {
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    themeIcon.className = `fas ${themes[theme].icon}`;
-    themeToggle.setAttribute('aria-label', themes[theme].label);
-    
-    // Update mobile browser UI
-    const themeColor = getComputedStyle(html)
-      .getPropertyValue('--nav-bg')
-      .trim();
-    document.querySelector('meta[name="theme-color"]')
-      .setAttribute('content', themeColor);
-  };
-  
-  // Initialize
-  const preferredTheme = getPreferredTheme();
-  setTheme(preferredTheme);
-  
-  // Watch for system changes (only if no manual preference)
-  if (!localStorage.getItem('theme')) {
-    window.matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) => {
-        const newTheme = e.matches ? 'dark' : 'light';
-        setTheme(newTheme);
-      });
-  }
-  
-  // Toggle on click
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  });
-};
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional portfolio of Swathi Lakshmi Bhaskaran, Data Engineer">
+  <meta name="keywords" content="data engineer, portfolio, python, SQL, data analytics">
+  <!-- Added dynamic theme-color meta tags -->
+  <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
+  <title>Swathi Lakshmi Bhaskaran | Data Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- [Rest of your existing HTML remains exactly the same until skills-section] -->
 
-// ===== Animate Skills =====
-const animateSkills = () => {
-  document.querySelectorAll('.skill').forEach(skill => {
-    const level = skill.dataset.level;
-    const bar = document.createElement('div');
-    bar.className = 'skill-bar';
-    bar.innerHTML = `<div class="skill-level" style="width: 0"></div>`;
-    skill.appendChild(bar);
-    
-    setTimeout(() => {
-      bar.querySelector('.skill-level').style.width = `${level}%`;
-    }, 500);
-  });
-};
+  <!-- Updated Skills Section -->
+  <div class="skills-section">
+    <h3>Technical Skills</h3>
+    <div class="skills-grid">
+      <div class="skill" data-skill="Python" data-level="95">
+        <span class="skill-name">Python</span>
+      </div>
+      <div class="skill" data-skill="SQL" data-level="90">
+        <span class="skill-name">SQL</span>
+      </div>
+      <div class="skill" data-skill="DAX" data-level="85">
+        <span class="skill-name">DAX</span>
+      </div>
+      <div class="skill" data-skill="Power BI" data-level="85">
+        <span class="skill-name">Power BI</span>
+      </div>
+      <div class="skill" data-skill="Azure" data-level="80">
+        <span class="skill-name">Azure</span>
+      </div>
+      <div class="skill" data-skill="JIRA" data-level="75">
+        <span class="skill-name">JIRA</span>
+      </div>
+      <!-- Rest of your skills... -->
+    </div>
+  </div>
 
-// ===== Rest of your existing JavaScript =====
-// Keep all other functions EXACTLY as they are:
-// initTypewriter(), initSmoothScroll(), initCardTilt(), initScrollAnimations()
-
-// Initialize Everything
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initTypewriter();
-  animateSkills();
-  initSmoothScroll();
-  initCardTilt();
-  initScrollAnimations();
-});
+  <!-- [Rest of your existing HTML remains exactly the same] -->
+</body>
+</html>
