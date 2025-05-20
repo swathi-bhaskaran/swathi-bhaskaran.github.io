@@ -1,76 +1,67 @@
-// Theme Management
+// ===== Theme Management =====
 const initTheme = () => {
   const themeToggle = document.getElementById('theme-toggle');
-  const icon = themeToggle.querySelector('i');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const themeIcon = themeToggle.querySelector('i');
+  const html = document.documentElement;
   
-  // Check localStorage for saved theme
-  const savedTheme = localStorage.getItem('theme');
-  
-  // Set initial theme
-  let currentTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  
-  // Set initial icon
-  if (currentTheme === 'dark') {
-    icon.classList.replace('fa-moon', 'fa-sun');
-  }
-
-  // Toggle function
-  themeToggle.addEventListener('click', () => {
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-    
-    // Update icon
-    icon.classList.toggle('fa-sun');
-    icon.classList.toggle('fa-moon');
-  });
-
-  // Watch for system changes (only if no saved preference)
-  if (!savedTheme) {
-    prefersDark.addEventListener('change', e => {
-      currentTheme = e.matches ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      icon.className = e.matches ? 'fas fa-sun' : 'fas fa-moon';
-    });
-  }
-};
-
-// Typewriter Effect
-const initTypewriter = () => {
-  const title = document.querySelector('.hero h1');
-  const subtitle = document.querySelector('.hero p');
-  const titleText = "Hi, I'm Swathi";
-  const subtitleText = "Data Engineer | Open Source Contributor";
-  
-  // Reset for animation
-  title.textContent = '';
-  subtitle.textContent = '';
-  
-  // Animate title
-  let i = 0;
-  const typing = setInterval(() => {
-    if (i < titleText.length) {
-      title.textContent += titleText[i];
-      i++;
-    } else {
-      clearInterval(typing);
-      // Animate subtitle
-      let j = 0;
-      const subtitleTyping = setInterval(() => {
-        if (j < subtitleText.length) {
-          subtitle.textContent += subtitleText[j];
-          j++;
-        } else {
-          clearInterval(subtitleTyping);
-        }
-      }, 50);
+  // Theme configurations
+  const themes = {
+    light: {
+      icon: 'fa-moon',
+      label: 'Switch to Dark Mode'
+    },
+    dark: {
+      icon: 'fa-sun',
+      label: 'Switch to Light Mode'
     }
-  }, 100);
+  };
+  
+  // Get user preference or fallback to system preference
+  const getPreferredTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    
+    return window.matchMedia('(prefers-color-scheme: dark)').matches 
+      ? 'dark' 
+      : 'light';
+  };
+  
+  // Apply theme
+  const setTheme = (theme) => {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeIcon.className = `fas ${themes[theme].icon}`;
+    themeToggle.setAttribute('aria-label', themes[theme].label);
+    
+    // Update mobile browser UI
+    const themeColor = getComputedStyle(html)
+      .getPropertyValue('--nav-bg')
+      .trim();
+    document.querySelector('meta[name="theme-color"]')
+      .setAttribute('content', themeColor);
+  };
+  
+  // Initialize
+  const preferredTheme = getPreferredTheme();
+  setTheme(preferredTheme);
+  
+  // Watch for system changes (only if no manual preference)
+  if (!localStorage.getItem('theme')) {
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        const newTheme = e.matches ? 'dark' : 'light';
+        setTheme(newTheme);
+      });
+  }
+  
+  // Toggle on click
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
 };
 
-// Animate Skills
+// ===== Animate Skills =====
 const animateSkills = () => {
   document.querySelectorAll('.skill').forEach(skill => {
     const level = skill.dataset.level;
@@ -85,60 +76,9 @@ const animateSkills = () => {
   });
 };
 
-// Smooth Scrolling
-const initSmoothScroll = () => {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-};
-
-// 3D Card Tilt Effect
-const initCardTilt = () => {
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const angleX = (y - centerY) / 20;
-      const angleY = (centerX - x) / 20;
-      
-      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-      card.style.transition = 'transform 0.5s ease';
-      setTimeout(() => card.style.transition = '', 500);
-    });
-  });
-};
-
-// Scroll Animations
-const initScrollAnimations = () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.project-card, .section-header').forEach(el => {
-    observer.observe(el);
-  });
-};
+// ===== Rest of your existing JavaScript =====
+// Keep all other functions EXACTLY as they are:
+// initTypewriter(), initSmoothScroll(), initCardTilt(), initScrollAnimations()
 
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
