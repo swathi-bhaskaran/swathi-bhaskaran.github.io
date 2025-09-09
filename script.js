@@ -70,20 +70,6 @@ const initTypewriter = () => {
   }, 100);
 };
 
-// Animate Skills
-const animateSkills = () => {
-  document.querySelectorAll('.skill').forEach(skill => {
-    const level = skill.dataset.level;
-    const bar = document.createElement('div');
-    bar.className = 'skill-bar';
-    bar.innerHTML = `<div class="skill-level" style="width: 0"></div>`;
-    skill.appendChild(bar);
-    
-    setTimeout(() => {
-      bar.querySelector('.skill-level').style.width = `${level}%`;
-    }, 500);
-  });
-};
 
 // Smooth Scrolling
 const initSmoothScroll = () => {
@@ -191,7 +177,6 @@ const initContactForm = () => {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initTypewriter();
-  animateSkills();
   initSmoothScroll();
   initCardTilt();
   initScrollAnimations();
