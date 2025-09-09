@@ -42,7 +42,7 @@ const initTypewriter = () => {
   const title = document.querySelector('.hero h1');
   const subtitle = document.querySelector('.hero p');
   const titleText = "Hi, I'm Swathi";
-  const subtitleText = "Data Engineer | Open Source Contributor";
+  const subtitleText = "Data Analyst | Business Intelligence Specialist";
   
   // Reset for animation
   title.textContent = '';
