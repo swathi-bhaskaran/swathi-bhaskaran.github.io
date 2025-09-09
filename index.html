@@ -9,6 +9,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7BBLKJRFXF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-7BBLKJRFXF');
+  </script>
 </head>
 <body>
   <!-- Animated Background Elements -->
@@ -91,7 +101,7 @@
         <embed src="assets/swathi bhaskaran DA resume.pdf" type="application/pdf" width="100%" height="600px">
       </div>
       <div class="resume-actions">
-        <a href="assets/swathi bhaskaran DA resume.pdf" download="Swathi_Bhaskaran_Resume.pdf" class="btn">
+        <a href="assets/swathi bhaskaran DA resume.pdf" download="Swathi_Bhaskaran_Resume.pdf" class="btn" onclick="window.gtag && gtag('event', 'resume_download');">
           <i class="fas fa-download"></i> Download PDF
         </a>
 <div style="font-size: 24px; margin: 20px; color: green;">
@@ -145,7 +155,9 @@
       <p class="section-subtitle">Let's work together!</p>
     </div>
     <div class="contact-container">
-      <form class="contact-form glass-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form id="contact-form" class="contact-form glass-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New portfolio contact from hq4743.github.io" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -164,6 +176,7 @@
         <button type="submit" class="btn">
           <i class="fas fa-paper-plane"></i> Send Message
         </button>
+        <p id="contact-status" aria-live="polite" role="status" style="margin-top: 15px; font-weight: 500;"></p>
       </form>
       <div class="contact-info glass-card">
         <h3>Contact Information</h3>
@@ -182,10 +195,10 @@
           </li>
         </ul>
         <div class="social-links">
-          <a href="https://www.linkedin.com/in/swathi-bhaskaran" target="_blank" class="social-link" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/swathi-bhaskaran96/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn" onclick="window.gtag && gtag('event', 'social_click', {network: 'LinkedIn'});">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://github.com/swathilbhaskaran" target="_blank" class="social-link" aria-label="GitHub">
+          <a href="https://github.com/hq4743/hq4743.github.io" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" onclick="window.gtag && gtag('event', 'social_click', {network: 'GitHub'});">
             <i class="fab fa-github"></i>
           </a>
         </div>

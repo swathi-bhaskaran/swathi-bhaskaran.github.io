@@ -140,6 +140,53 @@ const initScrollAnimations = () => {
   });
 };
 
+// Contact Form Handler
+const initContactForm = () => {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('contact-status');
+  
+  if (!form || !status) return;
+
+  function setStatus(message, isSuccess = true) {
+    status.textContent = message;
+    status.style.color = isSuccess ? '#2e7d32' : '#c62828';
+    status.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    setStatus('Sending message...', true);
+    
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setStatus('Thanks! Your message was sent successfully.', true);
+        form.reset();
+        // Track form submission
+        if (window.gtag) {
+          gtag('event', 'form_submit', {
+            event_category: 'engagement',
+            event_label: 'contact_form'
+          });
+        }
+      } else {
+        setStatus('Oops! There was a problem sending your message. Please try again.', false);
+      }
+    } catch (error) {
+      setStatus('Network error. Please check your connection and try again.', false);
+    }
+  });
+};
+
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -148,4 +195,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initCardTilt();
   initScrollAnimations();
+  initContactForm();
 });
