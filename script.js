@@ -383,12 +383,14 @@ const createCategoryChart = () => {
         data: [15, 22, 18, 25, 12, 8],
         backgroundColor: ['#6c63ff', '#42b883', '#ffa726', '#ff6584', '#26c6da', '#9c27b0'],
         borderWidth: 2,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        hoverOffset: 0
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: { duration: 0 },
       plugins: {
         legend: {
           position: 'bottom',
