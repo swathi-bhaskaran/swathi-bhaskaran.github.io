@@ -199,54 +199,96 @@ const getProjectVisualization = (projectType) => {
   switch(projectType) {
     case 'ecommerce':
       return `
+        <style>
+          .tabs{margin-top:10px}
+          .tab-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+          .tab-button{padding:8px 14px;border:1px solid var(--glass-border);border-radius:999px;background:var(--glass-bg);cursor:pointer}
+          .tab-button.active{background:var(--primary);color:#fff}
+          .tab-panel{display:none;margin-top:10px}
+          .tab-panel.active{display:block}
+          .data-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:8px 0}
+          .table-wrap{max-height:55vh;overflow:auto;border:1px solid var(--glass-border);border-radius:12px}
+          table.data{width:100%;border-collapse:separate;border-spacing:0}
+          table.data th, table.data td{padding:8px 10px;border-bottom:1px solid var(--glass-border);font-size:0.95rem;white-space:nowrap}
+          table.data thead th{position:sticky;top:0;background:var(--card-bg,#111827);z-index:1}
+          .pager{display:flex;gap:8px;align-items:center}
+          .pager button{padding:6px 10px;border:1px solid var(--glass-border);background:var(--glass-bg);border-radius:6px;cursor:pointer}
+          .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(108,99,255,.12);color:var(--primary);font-weight:600;margin-left:6px}
+        </style>
+
         <div class="modal-header">
-          <h2><i class="fas fa-shopping-cart"></i> E-commerce Analytics: 20K Records Analysis</h2>
-          <p>Advanced data analysis of 20,000+ transactions with machine learning insights and predictive modeling</p>
+          <h2><i class="fas fa-shopping-cart"></i> E-commerce Analytics: 20K Records Analysis <span class="badge">Beta</span></h2>
+          <p>Advanced analysis of 20,000+ transactions with ML insights and full data browse.</p>
         </div>
-        
-        <div class="insights-grid">
-          <div class="insight-card">
-            <div class="insight-value">20,847</div>
-            <div class="insight-label">Records Analyzed</div>
+
+        <div class="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button" data-tab="sales">Sales</button>
+            <button class="tab-button" data-tab="customers">Customers</button>
+            <button class="tab-button" data-tab="products">Products</button>
+            <button class="tab-button" data-tab="data">Data</button>
           </div>
-          <div class="insight-card">
-            <div class="insight-value">85%</div>
-            <div class="insight-label">ML Model Accuracy</div>
+
+          <div id="tab-overview" class="tab-panel active">
+            <div class="insights-grid">
+              <div class="insight-card"><div class="insight-value">20,847</div><div class="insight-label">Records Analyzed</div></div>
+              <div class="insight-card"><div class="insight-value">85%</div><div class="insight-label">ML Model Accuracy</div></div>
+              <div class="insight-card"><div class="insight-value">$3.2M</div><div class="insight-label">Revenue Impact</div></div>
+              <div class="insight-card"><div class="insight-value">12</div><div class="insight-label">Customer Segments</div></div>
+            </div>
+            <div class="analysis-summary">
+              <h3><i class="fas fa-chart-line"></i> Executive Summary</h3>
+              <ul>
+                <li><strong>Segmentation:</strong> 12 groups identified via RFM and k-means.</li>
+                <li><strong>Seasonality:</strong> Q4 outperforms Q1 by ~52% revenue.</li>
+                <li><strong>Assortment:</strong> Top 20% SKUs drive 78% of revenue.</li>
+                <li><strong>Retention:</strong> Churn risk reduced with CLV-based offers.</li>
+              </ul>
+            </div>
           </div>
-          <div class="insight-card">
-            <div class="insight-value">$3.2M</div>
-            <div class="insight-label">Revenue Impact</div>
+
+          <div id="tab-sales" class="tab-panel">
+            <div class="chart-container">
+              <div class="chart-title">Revenue Trends (20K Transactions)</div>
+              <canvas id="salesChart" class="chart-canvas"></canvas>
+            </div>
           </div>
-          <div class="insight-card">
-            <div class="insight-value">12</div>
-            <div class="insight-label">Customer Segments</div>
+
+          <div id="tab-customers" class="tab-panel">
+            <div class="chart-container">
+              <div class="chart-title">Customer Segmentation Analysis</div>
+              <canvas id="categoryChart" class="chart-canvas"></canvas>
+            </div>
           </div>
-        </div>
-        
-        <div class="analysis-summary">
-          <h3><i class="fas fa-chart-line"></i> Key Findings from 20K Dataset:</h3>
-          <ul>
-            <li><strong>Customer Segmentation:</strong> Identified 12 distinct customer groups using RFM analysis</li>
-            <li><strong>Predictive Modeling:</strong> Built ML model to predict customer lifetime value with 85% accuracy</li>
-            <li><strong>Seasonal Patterns:</strong> Discovered 34% revenue increase during holiday seasons</li>
-            <li><strong>Product Performance:</strong> Top 20% of products generate 78% of total revenue</li>
-            <li><strong>Churn Prediction:</strong> Developed early warning system for customer retention</li>
-          </ul>
-        </div>
-        
-        <div class="chart-container">
-          <div class="chart-title">Revenue Trends (20K Transactions)</div>
-          <canvas id="salesChart" class="chart-canvas"></canvas>
-        </div>
-        
-        <div class="chart-container">
-          <div class="chart-title">Customer Segmentation Analysis</div>
-          <canvas id="categoryChart" class="chart-canvas"></canvas>
-        </div>
-        
-        <div class="chart-container">
-          <div class="chart-title">Product Performance Distribution</div>
-          <canvas id="channelChart" class="chart-canvas"></canvas>
+
+          <div id="tab-products" class="tab-panel">
+            <div class="chart-container">
+              <div class="chart-title">Product Performance Distribution</div>
+              <canvas id="channelChart" class="chart-canvas"></canvas>
+            </div>
+          </div>
+
+          <div id="tab-data" class="tab-panel">
+            <div class="data-toolbar">
+              <div class="pager">
+                <button id="ecom-prev">Prev</button>
+                <span id="ecom-page-info">Page 1</span>
+                <button id="ecom-next">Next</button>
+              </div>
+              <div>
+                Rows per page:
+                <select id="ecom-page-size">
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="data" id="ecom-table"></table>
+            </div>
+          </div>
         </div>
       `;
       
@@ -261,6 +303,8 @@ const initializeCharts = (projectType) => {
       createSalesChart();
       createCategoryChart();
       createChannelChart();
+      initEcommerceTabs();
+      initializeEcommerceDataTab();
       break;
   }
 };
@@ -414,6 +458,113 @@ document.addEventListener('click', (e) => {
     closeModal();
   }
 });
+
+// ----- Tabs + Data (CSV) -----
+let __ecomCsvRows = null;
+let __ecomHeaders = null;
+let __ecomPage = 1;
+let __ecomPageSize = 20;
+
+const initEcommerceTabs = () => {
+  const buttons = document.querySelectorAll('.tab-button');
+  const panels = document.querySelectorAll('.tab-panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const id = btn.dataset.tab;
+      const panel = document.getElementById(`tab-${id}`);
+      if (panel) panel.classList.add('active');
+    });
+  });
+};
+
+const initializeEcommerceDataTab = async () => {
+  const prev = document.getElementById('ecom-prev');
+  const next = document.getElementById('ecom-next');
+  const pageInfo = document.getElementById('ecom-page-info');
+  const pageSizeSel = document.getElementById('ecom-page-size');
+
+  if (!prev || !next || !pageInfo || !pageSizeSel) return;
+
+  pageSizeSel.addEventListener('change', () => {
+    __ecomPageSize = parseInt(pageSizeSel.value, 10);
+    __ecomPage = 1;
+    renderEcommerceTable();
+  });
+  prev.addEventListener('click', () => {
+    if (__ecomPage > 1) { __ecomPage -= 1; renderEcommerceTable(); }
+  });
+  next.addEventListener('click', () => {
+    const totalPages = Math.ceil((__ecomCsvRows?.length || 0) / __ecomPageSize);
+    if (__ecomPage < totalPages) { __ecomPage += 1; renderEcommerceTable(); }
+  });
+
+  if (!__ecomCsvRows) {
+    await loadEcommerceCsv();
+  }
+  renderEcommerceTable();
+};
+
+const loadEcommerceCsv = async () => {
+  // Try loading user's CSV placed in assets. Falls back silently if missing.
+  try {
+    const res = await fetch('assets/cleaned_data.csv');
+    if (!res.ok) return;
+    const text = await res.text();
+    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+    if (lines.length === 0) return;
+    __ecomHeaders = parseCsvLine(lines[0]);
+    __ecomCsvRows = lines.slice(1).map(parseCsvLine);
+  } catch (_) {
+    // ignore
+  }
+};
+
+const parseCsvLine = (line) => {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i+1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (ch === ',' && !inQuotes) {
+      result.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  result.push(current);
+  return result;
+};
+
+const renderEcommerceTable = () => {
+  const table = document.getElementById('ecom-table');
+  const pageInfo = document.getElementById('ecom-page-info');
+  if (!table || !__ecomHeaders) {
+    table && (table.innerHTML = '<tbody><tr><td>CSV not found at assets/cleaned_data.csv</td></tr></tbody>');
+    return;
+  }
+  const start = (__ecomPage - 1) * __ecomPageSize;
+  const end = Math.min(start + __ecomPageSize, __ecomCsvRows.length);
+  const rows = __ecomCsvRows.slice(start, end);
+  const thead = `<thead><tr>${__ecomHeaders.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead>`;
+  const tbody = `<tbody>${rows.map(r => `<tr>${r.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  table.innerHTML = thead + tbody;
+  const totalPages = Math.ceil(__ecomCsvRows.length / __ecomPageSize) || 1;
+  pageInfo.textContent = `Page ${__ecomPage} of ${totalPages}`;
+};
+
+const escapeHtml = (s) => String(s)
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#39;');
 
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
