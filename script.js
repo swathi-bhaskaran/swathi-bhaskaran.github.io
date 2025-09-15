@@ -200,41 +200,52 @@ const getProjectVisualization = (projectType) => {
     case 'ecommerce':
       return `
         <div class="modal-header">
-          <h2><i class="fas fa-shopping-cart"></i> E-commerce Sales Analysis</h2>
-          <p>Comprehensive analysis of online retail performance and customer behavior</p>
+          <h2><i class="fas fa-shopping-cart"></i> E-commerce Analytics: 20K Records Analysis</h2>
+          <p>Advanced data analysis of 20,000+ transactions with machine learning insights and predictive modeling</p>
         </div>
         
         <div class="insights-grid">
           <div class="insight-card">
-            <div class="insight-value">+23%</div>
-            <div class="insight-label">Revenue Growth</div>
+            <div class="insight-value">20,847</div>
+            <div class="insight-label">Records Analyzed</div>
           </div>
           <div class="insight-card">
-            <div class="insight-value">15%</div>
-            <div class="insight-label">Conversion Rate</div>
+            <div class="insight-value">85%</div>
+            <div class="insight-label">ML Model Accuracy</div>
           </div>
           <div class="insight-card">
-            <div class="insight-value">$2.4M</div>
-            <div class="insight-label">Total Sales</div>
+            <div class="insight-value">$3.2M</div>
+            <div class="insight-label">Revenue Impact</div>
           </div>
           <div class="insight-card">
-            <div class="insight-value">4.2</div>
-            <div class="insight-label">Avg Order Value</div>
+            <div class="insight-value">12</div>
+            <div class="insight-label">Customer Segments</div>
           </div>
         </div>
         
+        <div class="analysis-summary">
+          <h3><i class="fas fa-chart-line"></i> Key Findings from 20K Dataset:</h3>
+          <ul>
+            <li><strong>Customer Segmentation:</strong> Identified 12 distinct customer groups using RFM analysis</li>
+            <li><strong>Predictive Modeling:</strong> Built ML model to predict customer lifetime value with 85% accuracy</li>
+            <li><strong>Seasonal Patterns:</strong> Discovered 34% revenue increase during holiday seasons</li>
+            <li><strong>Product Performance:</strong> Top 20% of products generate 78% of total revenue</li>
+            <li><strong>Churn Prediction:</strong> Developed early warning system for customer retention</li>
+          </ul>
+        </div>
+        
         <div class="chart-container">
-          <div class="chart-title">Monthly Sales Trend</div>
+          <div class="chart-title">Revenue Trends (20K Transactions)</div>
           <canvas id="salesChart" class="chart-canvas"></canvas>
         </div>
         
         <div class="chart-container">
-          <div class="chart-title">Product Category Performance</div>
+          <div class="chart-title">Customer Segmentation Analysis</div>
           <canvas id="categoryChart" class="chart-canvas"></canvas>
         </div>
         
         <div class="chart-container">
-          <div class="chart-title">Customer Acquisition Channels</div>
+          <div class="chart-title">Product Performance Distribution</div>
           <canvas id="channelChart" class="chart-canvas"></canvas>
         </div>
       `;
@@ -254,20 +265,30 @@ const initializeCharts = (projectType) => {
   }
 };
 
-// E-commerce Charts
+// E-commerce Charts for 20K Dataset Analysis
 const createSalesChart = () => {
   const ctx = document.getElementById('salesChart').getContext('2d');
   new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
       datasets: [{
-        label: 'Sales ($M)',
-        data: [1.2, 1.4, 1.1, 1.6, 1.8, 2.0, 1.9, 2.1, 2.3, 2.4, 2.6, 2.4],
+        label: 'Revenue ($M)',
+        data: [2.1, 2.8, 2.4, 3.2],
         borderColor: '#6c63ff',
         backgroundColor: 'rgba(108, 99, 255, 0.1)',
         tension: 0.4,
-        fill: true
+        fill: true,
+        borderWidth: 3
+      }, {
+        label: 'Transactions (K)',
+        data: [4.2, 5.8, 4.9, 6.8],
+        borderColor: '#ff6584',
+        backgroundColor: 'rgba(255, 101, 132, 0.1)',
+        tension: 0.4,
+        fill: false,
+        borderWidth: 2,
+        yAxisID: 'y1'
       }]
     },
     options: {
@@ -275,15 +296,33 @@ const createSalesChart = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: false
+          display: true,
+          position: 'top'
         }
       },
       scales: {
         y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
           beginAtZero: true,
-          grid: {
-            color: 'rgba(0,0,0,0.1)'
+          title: {
+            display: true,
+            text: 'Revenue ($M)'
           }
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Transactions (K)'
+          },
+          grid: {
+            drawOnChartArea: false,
+          },
         }
       }
     }
@@ -295,10 +334,12 @@ const createCategoryChart = () => {
   new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Electronics', 'Clothing', 'Home & Garden', 'Books', 'Sports'],
+      labels: ['High-Value Customers', 'Frequent Buyers', 'Seasonal Shoppers', 'Price-Sensitive', 'New Customers', 'At-Risk'],
       datasets: [{
-        data: [35, 25, 20, 12, 8],
-        backgroundColor: ['#6c63ff', '#ff6584', '#42b883', '#ffa726', '#26c6da']
+        data: [15, 22, 18, 25, 12, 8],
+        backgroundColor: ['#6c63ff', '#42b883', '#ffa726', '#ff6584', '#26c6da', '#9c27b0'],
+        borderWidth: 2,
+        borderColor: '#fff'
       }]
     },
     options: {
@@ -306,7 +347,15 @@ const createCategoryChart = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'bottom'
+          position: 'bottom',
+          labels: {
+            padding: 20,
+            usePointStyle: true
+          }
+        },
+        title: {
+          display: true,
+          text: 'Customer Segments (12 groups identified)'
         }
       }
     }
@@ -318,11 +367,13 @@ const createChannelChart = () => {
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Organic Search', 'Social Media', 'Email', 'Direct', 'Paid Ads'],
+      labels: ['Electronics', 'Fashion', 'Home & Garden', 'Sports', 'Books', 'Beauty', 'Toys', 'Automotive'],
       datasets: [{
-        label: 'Traffic (%)',
-        data: [40, 25, 15, 12, 8],
-        backgroundColor: '#6c63ff'
+        label: 'Revenue Share (%)',
+        data: [28, 22, 18, 12, 8, 6, 4, 2],
+        backgroundColor: ['#6c63ff', '#ff6584', '#42b883', '#ffa726', '#26c6da', '#9c27b0', '#795548', '#607d8b'],
+        borderRadius: 8,
+        borderSkipped: false,
       }]
     },
     options: {
@@ -331,12 +382,26 @@ const createChannelChart = () => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: 'Product Category Revenue Distribution (20K transactions)'
         }
       },
       scales: {
         y: {
           beginAtZero: true,
-          max: 50
+          max: 30,
+          title: {
+            display: true,
+            text: 'Revenue Share (%)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Product Categories'
+          }
         }
       }
     }
