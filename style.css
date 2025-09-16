@@ -879,7 +879,7 @@ body {
   border-radius: 20px;
   padding: 2rem;
   max-width: 95vw;
-  width: min(1000px, 95vw);
+  width: min(1200px, 96vw);
   max-height: 82vh;
   overflow: hidden;
   position: relative;
