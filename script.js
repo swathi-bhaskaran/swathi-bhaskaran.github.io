@@ -314,8 +314,8 @@ const createSalesChart = () => {
   const canvas = document.getElementById('salesChart');
   if (!canvas) return;
   // Lock a consistent drawing size so it doesn't stretch/clip
-  canvas.width = 900;
-  canvas.height = 240;
+  canvas.width = 640;
+  canvas.height = 180;
   const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'line',
@@ -381,8 +381,8 @@ const createSalesChart = () => {
 const createCategoryChart = () => {
   const canvas = document.getElementById('categoryChart');
   if (!canvas) return;
-  canvas.width = 900;
-  canvas.height = 240;
+  canvas.width = 640;
+  canvas.height = 180;
   const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'doughnut',
@@ -419,8 +419,8 @@ const createCategoryChart = () => {
 const createChannelChart = () => {
   const canvas = document.getElementById('channelChart');
   if (!canvas) return;
-  canvas.width = 900;
-  canvas.height = 240;
+  canvas.width = 640;
+  canvas.height = 180;
   const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'bar',

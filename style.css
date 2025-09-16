@@ -936,7 +936,7 @@ body {
 
 .chart-canvas {
   max-width: 100%;
-  height: 240px;
+  height: 180px;
 }
 
 /* Fit modal contents within one viewport (no internal scroll) */
