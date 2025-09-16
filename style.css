@@ -764,7 +764,7 @@ body {
 
 .project-metrics {
   display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -779,7 +779,7 @@ body {
 
 .metric-value {
   display: block;
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
   font-weight: bold;
   color: var(--primary);
   margin-bottom: 0.25rem;
