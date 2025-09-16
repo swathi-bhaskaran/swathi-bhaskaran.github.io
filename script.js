@@ -311,7 +311,12 @@ const initializeCharts = (projectType) => {
 
 // E-commerce Charts for 20K Dataset Analysis
 const createSalesChart = () => {
-  const ctx = document.getElementById('salesChart').getContext('2d');
+  const canvas = document.getElementById('salesChart');
+  if (!canvas) return;
+  // Lock a consistent drawing size so it doesn't stretch/clip
+  canvas.width = 900;
+  canvas.height = 240;
+  const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'line',
     data: {
@@ -336,8 +341,8 @@ const createSalesChart = () => {
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: false,
+      animation: { duration: 0 },
       plugins: {
         legend: {
           display: true,
@@ -374,7 +379,11 @@ const createSalesChart = () => {
 };
 
 const createCategoryChart = () => {
-  const ctx = document.getElementById('categoryChart').getContext('2d');
+  const canvas = document.getElementById('categoryChart');
+  if (!canvas) return;
+  canvas.width = 900;
+  canvas.height = 240;
+  const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -388,8 +397,7 @@ const createCategoryChart = () => {
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: false,
       animation: { duration: 0 },
       plugins: {
         legend: {
@@ -409,7 +417,11 @@ const createCategoryChart = () => {
 };
 
 const createChannelChart = () => {
-  const ctx = document.getElementById('channelChart').getContext('2d');
+  const canvas = document.getElementById('channelChart');
+  if (!canvas) return;
+  canvas.width = 900;
+  canvas.height = 240;
+  const ctx = canvas.getContext('2d');
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -423,8 +435,8 @@ const createChannelChart = () => {
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: false,
+      animation: { duration: 0 },
       plugins: {
         legend: {
           display: false
@@ -512,7 +524,7 @@ const initializeEcommerceDataTab = async () => {
 const loadEcommerceCsv = async () => {
   // Try loading user's CSV placed in assets. Falls back silently if missing.
   try {
-    const res = await fetch('assets/cleaned_data.csv');
+    const res = await fetch(`assets/cleaned_data.csv?v=${Date.now()}`);
     if (!res.ok) return;
     const text = await res.text();
     const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
