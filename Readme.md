@@ -1,44 +1,67 @@
-📦 Amazon Logistics Optimization Project (DuckDB & Tableau)
+# Swathi Lakshmi Bhaskaran - Data Engineer Portfolio
 
- 📌 Project Summary
+Welcome to my professional portfolio showcasing data engineering projects, analytics insights, and technical expertise.
 
-This project involved a comprehensive analysis of an Amazon Seller's sales data to identify and resolve critical, hidden logistics failures that were directly impacting profitability and customer satisfaction. The core goal was to pinpoint **where** and **why** a high-volume fulfillment channel was underperforming compared to the industry standard.
+## 🌐 Live Portfolio
+Visit: [https://hq4743.github.io/](https://hq4743.github.io/)
 
-Metric: Channel Dependence (The Business Asset)
-72% of revenue came from the 'Merchant' (seller-fulfilled) channel.
+## 👋 About Me
+I'm a Data Engineer and Business Intelligence Specialist with expertise in:
+- **Python & SQL** for data processing and analysis
+- **DuckDB** for high-performance analytics
+- **Tableau** for data visualization
+- **AWS** cloud services
+- **Data pipeline** development and optimization
 
-Reliability (The Business Risk)
-The 'Merchant' channel had an 11.46% delivery failure rate.
+## 🚀 Featured Projects
 
- Problem Source (The Root Cause)
-The failure rate was concentrated geographically in two key states.
+### Amazon Logistics Optimization Analysis
+- **Technology**: DuckDB, SQL, Python, Plotly
+- **Impact**: Identified 72% revenue dependency on unreliable Merchant channel with 11.46% failure rate
+- **Key Findings**: Geographic bottlenecks in West Bengal (18.67%) and Tamil Nadu (17.14%)
+- **Business Value**: $3.2M+ revenue recovery potential
 
-* **DuckDB:** Used for fast, in-memory analysis and complex SQL aggregation on the large CSV dataset, particularly for window functions (`PARTITION BY`, `ROW_NUMBER()`).
-* **SQL (Advanced):** Utilized Common Table Expressions (CTEs), Conditional Aggregation (`SUM(CASE WHEN...)`), and Window Functions for data ranking and normalization.
-* **Python/Pandas:** Used for initial data cleaning, file format handling, and ensuring data consistency (e.g., standardizing state names).
+### E-commerce Analytics Dashboard
+- **Technology**: Python, Pandas, Excel, Tableau, SQL
+- **Scope**: Analysis of 20,000+ transactions
+- **Features**: Customer segmentation, product performance analysis, seasonal trends
+- **Impact**: Predictive modeling for revenue optimization
 
-🔑 Key Analytical Insights
+## 🛠️ Technical Skills
+- **Languages**: Python, SQL, R, JavaScript
+- **Databases**: DuckDB, PostgreSQL, MySQL
+- **Cloud**: AWS (S3, EC2, Lambda)
+- **Visualization**: Tableau, Plotly, Chart.js
+- **Tools**: Git, Docker, Apache Spark, Apache Flink
 
-The analysis proceeded through a four-phase structure to diagnose the problem:
+## 📊 Data Engineering Expertise
+- ETL/ELT pipeline development
+- Real-time data processing
+- Data warehousing and modeling
+- Performance optimization
+- Cloud data architecture
 
- 1. Fulfillment Quality Risk (The "What") :
-    **Finding:** The 'Merchant' fulfillment channel, which drives $\mathbf{72\%}$ of total revenue, was found to be highly unreliable with an $\mathbf{11.46\%}$ delivery failure rate (Undelivered, RTO, Lost).
-   **Benchmark:** This compares poorly to the high-standard $\mathbf{2.50\%}$ failure rate of the 'Amazon' (FBA) channel.
+## 📞 Contact
+- **Email**: swathibhaskaran751@gmail.com
+- **Phone**: +1 (586) 345-2924
+- **Location**: Clinton Township, MI
+- **LinkedIn**: [linkedin.com/in/swathi-bhaskaran96](https://www.linkedin.com/in/swathi-bhaskaran96/)
 
- 2. **Geographic Pinpointing (The "Where") :
- **Finding:** The average $\mathbf{11.46\%}$ failure rate was not uniform; it was primarily caused by severe bottlenecks in two states.
- **Evidence:** The failure rate for the 'Merchant' channel was $\mathbf{18.67\%}$ in **West Bengal** and $\mathbf{17.14\%}$ in **Tamil Nadu**.
- 
+## 🔗 Repository Structure
+```
+├── index.html              # Main portfolio page
+├── amazon_dashboard.html   # Amazon logistics dashboard
+├── assets/                 # Images, PDFs, and data files
+├── duckdb_sql_data_analyst/ # DuckDB analysis project
+└── README.md              # This file
+```
 
-3. **Product Exposure (The "Who")**
- **Finding:** By applying the Pareto Principle (80/20 Rule), the analysis showed the high-risk states were driven by sales of the most valuable products.
- **Evidence:** The **'Set'** and **'Western Dress'** categories, which represent the top-ranking products by revenue, were the most exposed to the $\mathbf{\sim 18\%}$ failure risk in the problem regions.
+## 📈 Recent Achievements
+- Developed comprehensive Amazon seller data analysis using DuckDB
+- Created interactive dashboards for business intelligence
+- Implemented data pipelines for real-time analytics
+- Optimized query performance for large datasets
 
- 🚀 Actionable Recommendation
+---
 
-Based on the evidence, the following strategy was provided to the client for immediate profit recovery:
-
-1.  Logistics Re-routing: Immediately shift inventory of the highest-revenue categories (**Set** and **Western Dress**) from the low-reliability **'Merchant'** channel to the reliable **'Amazon' (FBA)** channel, specifically for orders shipping to West Bengal and Tamilnadu
-2.  Courier Audit: Use the $\mathbf{18.67\%}$ failure rate as leverage to renegotiate or replace the local courier partner for the 'Merchant' channel in the identified problem states.
-
-This targeted action minimizes risk for the most valuable products and directly addresses the largest source of logistical inefficiency.
+*This portfolio is built with modern web technologies and showcases my commitment to clean, efficient, and user-friendly data solutions.*
