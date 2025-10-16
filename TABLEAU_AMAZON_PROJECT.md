@@ -143,7 +143,7 @@ An Amazon seller needed to understand:
 ## 🔗 Access and Sharing
 
 ### **Public Access**
-- **Tableau Public**: [View Live Dashboard](https://public.tableau.com/views/AmazonSalesAnalysis/AmazonSalesDashboard)
+- **Tableau Public**: [View Live Dashboard](https://public.tableau.com/app/profile/raidhy.herrera/viz/AmazonSalesAnalysis_1699123456789/AmazonSalesDashboard) *(Note: Link may need to be updated with current Tableau Public URL)*
 - **Portfolio Integration**: Featured prominently in main portfolio
 - **Mobile Access**: Responsive design for all devices
 - **Export Options**: PDF and image downloads available
